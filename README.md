@@ -38,4 +38,3 @@ The most powerful aspect of this directive is to use it as template to create ot
 > **Note:**
 > - The library has not been packaged for distribution yet so if you want to use it you'll have to copy the source.
 
-#### <i class="icon-file"></i> Test
