@@ -34,3 +34,6 @@ Any element can serve as the root of either mode, a simple example is show below
 It can also wrap complex blocks or other directives (ui-select has been the primary test case for this).
  
 The most powerful aspect of this directive is to use it as template to create other directives.
+
+> **Note:**
+> - The library has not been packaged for distribution yet so if you want to use it you'll have to copy the source.
