@@ -22,9 +22,9 @@ Components
 Currently there is a single component, I hope to add more in the future.
 
 ###click-to-edit
-This is a nice directive inspired by ```Jira``` form elements. The gist is a form field is wrapped by this directive to provide two modes of display - ```display mode``` and ```edit mode```.  In ```display mode``` a simple text rendering is displayed. When hovering over the element it morphs into a bordered ```click to edit``` box with a bootstrap pencil glyph. Click the element toggles into ```edit mode``` where the field can then be edited. The user is offered a ```save``` and ```cancel```.
+This is a nice directive inspired by ```Jira``` form elements. The gist is that a form field is wrapped by this directive to provide two modes of display - ```display mode``` and ```edit mode```.  In ```display mode``` a simple text rendering is displayed. When hovering over the element it morphs into a bordered ```click to edit``` box with a bootstrap pencil glyph. Click the element toggles into ```edit mode``` where the field can then be edited. The user is offered a ```save``` and ```cancel```.
 
-Any element can serve as the root of either mode, as simple example is show below.
+Any element can serve as the root of either mode, a simple example is show below.
 ```html
 <click-to-edit>
      <span display-mode>{{model.value}}</span>
