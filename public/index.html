@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="widget-demo-app">
+
+<head>
+    <title>Angular Widgets</title>
+    <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- build:js(vendor) scripts/modules.js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <!-- endbuild -->
+
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/app.js"></script>
+    <!-- endbuild -->
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css">
+    <link href="styles/main.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body ng-controller="WidgetsController">
+
+    <style>
+        .widgetExample{
+            border: 1px solid gray;
+            margin: 15px;
+            padding: 25px;
+            display: inline-block;
+            width: 400px
+        }
+    </style>
+
+    <div class="container-fluid" ng-controller="WidgetsController">
+
+        <br/>
+
+        <click-to-edit>
+            <span display-mode>{{widgets.dummy.offering1.desc}}</span>
+            <input edit-mode type="text" ng-model="widgets.dummy.offering1.desc"/>
+        </click-to-edit>
+
+        <br/>
+
+        <click-to-edit>
+            <span display-mode>-{{widgets.dummy.assignedPerson.name}}-</span>
+            <ui-select edit-mode  ng-model="widgets.dummy.assignedPerson" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
+                <ui-select-match class="clickMe" placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="person in widgets.dummy.people | propsFilter: {name: $select.search, age: $select.search}">
+                    <div ng-bind-html="person.name | highlight: $select.search"></div>
+                    <small>
+                        email: {{person.email}}
+                        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+        </click-to-edit>
+
+
+    </div>
+
+</body>
+
+</html>
