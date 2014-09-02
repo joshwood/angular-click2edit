@@ -29,7 +29,7 @@ angular.module('widget-demo-app').controller('WidgetsController', ['$scope', fun
     };
 }]);
 
-angular.module('widgets', ['ngSanitize', 'ui.select']);
+angular.module('widgets', []);
 angular.module('widgets').directive('clickToEdit', function ($timeout, $parse) {
     return {
         restrict: 'AE',
