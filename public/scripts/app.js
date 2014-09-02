@@ -171,19 +171,23 @@ angular.module('widgets').directive('editMode', function ($timeout) {
              * add some kind of extra attribute or a duplicate reference to ng-model on the root.
              * ui-select has multiple ng-model(s) which pointed out this issue
              */
-            var modelEl = searchForModelElement(element);
-            cntrl.tellMeTheModel(modelEl.attr('ng-model'));
+            searchForModelElement(element, function(modelEl){
+                cntrl.tellMeTheModel(modelEl.attr('ng-model'));    
+            });
+            
+            
 
             /*
              * walks through the children looking for the first element with ng-model
              */
-            function searchForModelElement(el){
+            function searchForModelElement(el, callback){
                 if(el.attr('ng-model')){
-                    return el;
+                    callback(el);
+                    return;
                 }
                 angular.forEach(el.children(), function(x){
                     var el = angular.element(x);
-                    searchForModelElement(el);
+                    searchForModelElement(el, callback);
                 });
             }
 
