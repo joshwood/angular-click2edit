@@ -6,16 +6,15 @@
     <meta content="IE=EDGE" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- build:js(vendor) scripts/modules.js -->
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
-    <!-- endbuild -->
-
 
     <!-- build:js scripts/main.js -->
-    <script src="scripts/app.js"></script>
+    <script src="scripts/angular-widgets.js"></script>
     <!-- endbuild -->
+
+    <script src="scripts/app.js"></script>
 
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet" type="text/css" />
@@ -25,16 +24,6 @@
 </head>
 
 <body ng-controller="WidgetsController">
-
-    <style>
-        .widgetExample{
-            border: 1px solid gray;
-            margin: 15px;
-            padding: 25px;
-            display: inline-block;
-            width: 400px
-        }
-    </style>
 
     <div class="container-fluid" ng-controller="WidgetsController">
 
