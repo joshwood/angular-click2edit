@@ -31,11 +31,8 @@ Any element can serve as the root of either mode, a simple example is show below
      <input edit-mode type="text" ng-model="model.value"/>
  </click-to-edit>
 ```
-It can also wrap complex blocks or other directives.
-Below you can see an example using ```ui-select```. The directive will try to trigger a 'click' event 
-on whatever element has the ng-model attribute, but if that is not the correct element you can add a ```clickMe``` class to the
-element that should be click when entering ```edit mode``` (seen below). 
-The effect is rather nice, the select box will render in its ```open``` state.
+It can also wrap complex markup blocks or other directives. 
+Below you can see an example using ```ui-select```. 
 ```html
 <click-to-edit>
 	<span display-mode>{{model.value}}</span>
@@ -51,8 +48,11 @@ The effect is rather nice, the select box will render in its ```open``` state.
 	</ui-select>
  </click-to-edit>
 ```
+> **Notes:**
+> - The directive will bind to the ```first``` ng-model it finds in the ```edit mode``` block.
+> - The directive will try to trigger a 'click' event on the element that contains the ng-model attribute.
+> - You can add a ```clickMe``` class to the element that should be click when entering ```edit mode``` if it is not the one with the ng-model attribute. (shown above)
 
- 
 The most powerful aspect of this directive is to use it as template to create other directives.
 
 
