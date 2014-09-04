@@ -31,10 +31,28 @@ Any element can serve as the root of either mode, a simple example is show below
      <input edit-mode type="text" ng-model="model.value"/>
  </click-to-edit>
 ```
-It can also wrap complex blocks or other directives (ui-select has been the primary test case for this).
+It can also wrap complex blocks or other directives.
+Below you can see an example using ```ui-select```. The directive will try to trigger a 'click' event 
+on whatever element has the ng-model attribute, but if that is not the correct element you can add a ```clickMe``` class to the
+element that should be click when entering ```edit mode``` (seen below). 
+The effect is rather nice, the select box will render in its ```open``` state.
+```html
+<click-to-edit>
+	<span display-mode>{{model.value}}</span>
+	<ui-select edit-mode  ng-model="widgets.dummy.assignedPerson">
+	    <ui-select-match class="clickMe" >{{$select.selected.name}}</ui-select-match>
+	    <ui-select-choices repeat="person in widgets.dummy.people">
+	        <div ng-bind-html="person.name "></div>
+	        <small>
+	            email: {{person.email}}
+	            age: <span ng-bind-html="''+person.age"></span>
+	        </small>
+	    </ui-select-choices>
+	</ui-select>
+ </click-to-edit>
+```
+
  
 The most powerful aspect of this directive is to use it as template to create other directives.
 
-> **Note:**
-> - The library has not been packaged for distribution yet so if you want to use it you'll have to copy the source.
 
