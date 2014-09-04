@@ -70,7 +70,6 @@ angular.module('widgets').directive('clickToEdit', function ($timeout, $parse) {
             this.tellMeTheModel = function(model){
                 $scope.rProps.modelString = model;
                 $scope.rProps.rollbackValue = $scope.$parent.$eval(model);
-                //console.log($scope.rProps.rollbackValue);
             };
         },
         link: function(scope, element){
@@ -154,28 +153,36 @@ angular.module('widgets').directive('editMode', function ($timeout) {
                 element.toggleClass('hideMode', !editMode);
 
                 /*
-                 * look for an element to focus on
+                 * we'll look for something to click and focus on.
+                 * we will focus on the model element and and click it unless
+                 * someone has tagged an element with the 'clickMe' class then we will
+                 * click that.
                  */
-                tryToFocus();
-
-                /*
-                 * look for the 'clickMe' class and click it
-                 */
-                tryToClick();
+                searchForModelElement(element, function(modelEl){
+                    tryToFocus(modelEl[0]);
+                    var clicker = element.hasClass('clickMe') ? element[0] : element[0].querySelector('.clickMe');
+                    tryToClick(clicker || modelEl);
+                });
 
             });
 
             /*
-             * dig through the edit elements to find the !!FIRST!! element with an ng-model attribute
-             * so the controller can keep up with it. that's the best I can do without making the user
-             * add some kind of extra attribute or a duplicate reference to ng-model on the root.
-             * ui-select has multiple ng-model(s) which pointed out this issue
+             * try to find something to focus on, nice for text fields
              */
-            searchForModelElement(element, function(modelEl){
-                cntrl.tellMeTheModel(modelEl.attr('ng-model'));    
-            });
-            
-            
+            function tryToFocus(focusOnMe){
+                $timeout(function(){
+                    focusOnMe.focus();
+                }, 0);
+            }
+
+            /*
+             * we'll look for something to click, used to expand things like a ui-select element
+             */
+            function tryToClick(clicker){
+                $timeout(function(){
+                    angular.element(clicker).triggerHandler('click');
+                }, 0);
+            }
 
             /*
              * walks through the children looking for the first element with ng-model
@@ -192,22 +199,15 @@ angular.module('widgets').directive('editMode', function ($timeout) {
             }
 
             /*
-             * try to find something to focus on, nice for text fields
+             * dig through the edit elements to find the !!FIRST!! element with an ng-model attribute
+             * so the controller can keep up with it. that's the best I can do without making the user
+             * add some kind of extra attribute or a duplicate reference to ng-model on the root.
+             * ui-select has multiple ng-model(s) which pointed out this issue
              */
-            function tryToFocus(){
-                var focusOnMe = element.hasClass('ng-valid') ? element[0] : element[0].querySelector('.ng-valid');
-                focusOnMe ? focusOnMe.focus() : angular.noop;
-            }
+            searchForModelElement(element, function(modelEl){
+                cntrl.tellMeTheModel(modelEl.attr('ng-model'));    
+            });
 
-            /*
-             * we'll look for something to click, used to expand things like a ui-select element
-             */
-            function tryToClick(){
-                var clicker = element.hasClass('clickMe') ? element[0] : element[0].querySelector('.clickMe');
-                $timeout(function(){
-                    angular.element(clicker).triggerHandler('click');
-                }, 0);
-            }
         }
     }
 });

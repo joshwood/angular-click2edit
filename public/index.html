@@ -48,7 +48,7 @@
         <br/>
 
         <click-to-edit>
-            <span display-mode>-{{widgets.dummy.assignedPerson.name}}-</span>
+            <span display-mode>{{widgets.dummy.assignedPerson.name}}</span>
             <ui-select edit-mode  ng-model="widgets.dummy.assignedPerson" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
                 <ui-select-match class="clickMe" placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="person in widgets.dummy.people | propsFilter: {name: $select.search, age: $select.search}">
