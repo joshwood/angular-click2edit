@@ -7,10 +7,8 @@ module.exports = function(grunt) {
     grunt.initConfig({
         myApp:{
             web: 'public',
-            server: 'app',
-            dist: 'dist',
-            dist_web: 'dist/public',
-            dist_server: 'dist/app'
+            scripts: 'public/scripts',
+            dist: 'dist'
         },
         connect: {
             options: {
@@ -59,21 +57,7 @@ module.exports = function(grunt) {
                 path: 'http://localhost:9000'
             }
         },
-        useminPrepare: {
-            html: '<%= myApp.web%>/index.html',
-            options: {
-                dest: '<%= myApp.dist_web %>'
-            }
-        },
 
-        // Performs rewrites based on rev and the useminPrepare configuration
-        usemin: {
-            //html: ['<%= myApp.dist_web %>/{,*/}*.html'],
-            html: '<%= myApp.dist_web%>/index.html',
-            options: {
-                assetsDirs: ['<%= myApp.dist_web %>']
-            }
-        },
         // Empties folders to start fresh
         clean: {
             dist: {
@@ -92,35 +76,20 @@ module.exports = function(grunt) {
                 files:[{
                     expand: true,
                     dot: true,
-                    cwd: '<%= myApp.web %>',
-                    dest: '<%= myApp.dist_web %>',
-                    src:[
-                        '*.html',
-                        'images/**',
-                        'styles/**',
-                        'views/**/*.html'
-                    ]
-                },
-                {
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= myApp.server %>',
-                    dest: '<%= myApp.dist_server %>',
-                    src:[
-                        '**/*'
-                    ]
-                },
-                {
-                    expand: true,
-                    dot: true,
-                    cwd: '.',
+                    cwd: '<%= myApp.scripts %>',
                     dest: '<%= myApp.dist %>',
                     src:[
-                        'server.js',
-                        'package.json'
+                        'angular-widgets.js'
                     ]
                 }
                 ]
+            }
+        },
+        uglify:
+        {
+            '<%= myApp.dist %>/angular-widgets-min.js': ['<%= myApp.dist %>/angular-widgets.js'],
+            options:{
+                mangle: false // without this, angular will puke on the minified js
             }
         },
         bower:{
@@ -147,13 +116,8 @@ module.exports = function(grunt) {
     grunt.registerTask('build', function (target) {
         grunt.task.run([
             'clean:dist',
-            'bower',
-            'useminPrepare',
-            'concat',
             'copy:dist',
-            //'cssmin',
-            'uglify',
-            'usemin'
+            'uglify'
         ]);
     });
 
