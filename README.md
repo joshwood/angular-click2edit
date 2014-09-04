@@ -17,6 +17,11 @@ $ grunt server
 ```
 This setup a server instance with livereload on port ```9000```. You can navigate to http://locahost:9000 to see a demo app that shows the components (it is currently in a pretty plain state, I'm just getting started).
 
+To create a distribution, which is just a minified and non-minified version on the angular-widgets.js file, execute the following.
+```bash
+$ grunt build
+```
+
 Components
 ----------------
 Currently there is a single component, I hope to add more in the future.
