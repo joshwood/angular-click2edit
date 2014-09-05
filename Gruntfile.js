@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         myApp:{
             web: 'public',
             scripts: 'public/scripts',
+            styles: 'public/styles',
             dist: 'dist'
         },
         connect: {
@@ -81,17 +82,36 @@ module.exports = function(grunt) {
                     src:[
                         'angular-widgets.js'
                     ]
-                }
-                ]
+                },
+                {
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= myApp.styles %>',
+                    dest: '<%= myApp.dist %>',
+                    src:[
+                        '*.css'
+                    ]
+                }                ]
             }
         },
         uglify:
         {
-            '<%= myApp.dist %>/angular-widgets-min.js': ['<%= myApp.dist %>/angular-widgets.js'],
+            '<%= myApp.dist %>/angular-widgets.min.js': ['<%= myApp.scripts %>/angular-widgets.js'],
             options:{
                 mangle: false // without this, angular will puke on the minified js
             }
         },
+        cssmin: {
+          my_target: {
+            files: [{
+              expand: true,
+              cwd: '<%= myApp.styles %>',
+              src: ['*.css', '!*.min.css'],
+              dest: '<%= myApp.dist %>',
+              ext: '.min.css'
+            }]
+          }
+        },        
         bower:{
             install:{
             }
@@ -117,7 +137,8 @@ module.exports = function(grunt) {
         grunt.task.run([
             'clean:dist',
             'copy:dist',
-            'uglify'
+            'uglify',
+            'cssmin'
         ]);
     });
 
