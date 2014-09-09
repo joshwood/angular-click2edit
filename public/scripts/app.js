@@ -1,4 +1,11 @@
+/*
+ * inject our widgets and the ui-select stuff for the demo
+ */
 angular.module('widget-demo-app', ['ngSanitize', 'ui.select', 'widgets']);
+
+/*
+ * simple controller for our demo
+ */
 angular.module('widget-demo-app').controller('WidgetsController', ['$scope', function($scope){
     $scope.widgets = {};
     $scope.widgets.dummy = {
@@ -28,3 +35,38 @@ angular.module('widget-demo-app').controller('WidgetsController', ['$scope', fun
 
     };
 }]);
+
+/*
+ * used for ui-select search in the demo, should not be part of the distribution
+ * so we're putting it here.
+ */
+angular.module('widget-demo-app').filter('propsFilter', function() {
+    return function(items, props) {
+        var out = [];
+
+        if (angular.isArray(items)) {
+            items.forEach(function(item) {
+                var itemMatches = false;
+
+                var keys = Object.keys(props);
+                for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        itemMatches = true;
+                        break;
+                    }
+                }
+
+                if (itemMatches) {
+                    out.push(item);
+                }
+            });
+        } else {
+            // Let the output be the input untouched
+            out = items;
+        }
+
+        return out;
+    }
+});

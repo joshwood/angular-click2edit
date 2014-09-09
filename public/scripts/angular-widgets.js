@@ -137,7 +137,12 @@ angular.module('widgets').directive('editMode', ['$timeout', function ($timeout)
             });
 
             /*
-             * try to find something to focus on, nice for text fields
+             * try to find something to focus on, nice for text fields.
+             * The use of $timeout here may actually be a remnant of a previous incarnation of this
+             * directive (it was required previously but now works without too).
+             * There is a discussion in the link below, it seems to vary based on on the the use 
+             * of isoloated scope or not. It doesn't appear to hurt anything to leave it <-:
+             * http://stackoverflow.com/questions/14833326/how-to-set-focus-on-input-field
              */
             function tryToFocus(focusOnMe){
                 $timeout(function(){
@@ -146,7 +151,10 @@ angular.module('widgets').directive('editMode', ['$timeout', function ($timeout)
             }
 
             /*
-             * we'll look for something to click, used to expand things like a ui-select element
+             * we'll look for something to click. Used to expand things like a ui-select element.
+             * The use of $timeout here is due to an exception I ran into when trying to embed
+             * a ui-select element as the 'edit mode' - it was `digest already in progress`, this
+             * solved the issue
              */
             function tryToClick(clicker){
                 $timeout(function(){
@@ -198,56 +206,4 @@ angular.module('widgets').directive('ngEnter', function () {
             }
         });
     };
-});
-/*
- * ripped from example
- * http://stackoverflow.com/questions/12592472/how-to-highlight-a-current-menu-item-in-angularjs
- */
-angular.module('widgets').directive('activeLink', ['$location', function(location) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            var clazz = attrs.activeLink;
-            var path = attrs.when;
-            scope.location = location;
-            scope.$watch('location.path()', function(newPath) {
-                if (path === newPath) {
-                    element.addClass(clazz);
-                } else {
-                    element.removeClass(clazz);
-                }
-            });
-        }
-    };
-}]);
-
-angular.module('widgets').filter('propsFilter', function() {
-    return function(items, props) {
-        var out = [];
-
-        if (angular.isArray(items)) {
-            items.forEach(function(item) {
-                var itemMatches = false;
-
-                var keys = Object.keys(props);
-                for (var i = 0; i < keys.length; i++) {
-                    var prop = keys[i];
-                    var text = props[prop].toLowerCase();
-                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                        itemMatches = true;
-                        break;
-                    }
-                }
-
-                if (itemMatches) {
-                    out.push(item);
-                }
-            });
-        } else {
-            // Let the output be the input untouched
-            out = items;
-        }
-
-        return out;
-    }
 });
