@@ -9,16 +9,12 @@ angular.module('widget-demo-app', ['ngSanitize', 'ui.select', 'widgets']);
 angular.module('widget-demo-app').controller('WidgetsController', ['$scope', function($scope){
     $scope.widgets = {};
     $scope.widgets.dummy = {
-        offering1:{
-            desc: "Dummy Offering 1",
-            enabled: false
-        },
-        offering2:{
-            desc: "Dummy Offering 2",
-            enabled: true
-        },
-        assignedPerson:{
-            name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador'
+        sprint:{
+            desc: "Learn directives",
+            completed: false,
+            assignedPerson:{
+                name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador'
+            }        
         },
         people : [
             { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
@@ -31,8 +27,11 @@ angular.module('widget-demo-app').controller('WidgetsController', ['$scope', fun
             { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
             { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
             { name: 'Nicolás',   email: 'nicole@email.com',    age: 43, country: 'Colombia' }
+        ],
+        statusOptions:[
+            {status: false, label: "No"},
+            {status: true, label: "Yes"}
         ]
-
     };
 }]);
 

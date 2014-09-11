@@ -19,35 +19,71 @@
     <link rel="stylesheet" href="bower_components/select2/select2.css">
     
     <link href="styles/angular-widgets.css" rel="stylesheet" type="text/css" />
+    <link href="styles/app.css" rel="stylesheet" type="text/css" />
 
 </head>
 
-<body ng-controller="WidgetsController">
+<body>
 
     <div class="container-fluid" ng-controller="WidgetsController">
 
-        <br/>
 
-        <click-to-edit>
-            <span display-mode>{{widgets.dummy.offering1.desc}}</span>
-            <input edit-mode type="text" ng-model="widgets.dummy.offering1.desc"/>
-        </click-to-edit>
+        <div class="container-fluid img-rounded widgetExample">
+            <div>
+                <h3>Click to Edit</h3>
+                Below are various implementation of the `click to edit` directive. Mouse over and click to see in action.
+                UI-SELECT was used to demonstrate complex `edit` and `display` modes. These complex types might lend themselves
+                to being their own directives that leverage `click to edit` to save on typing.
+            </div>
 
-        <br/>
+            <hr>
 
-        <click-to-edit>
-            <span display-mode>{{widgets.dummy.assignedPerson.name}}</span>
-            <ui-select edit-mode  ng-model="widgets.dummy.assignedPerson" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
-                <ui-select-match class="clickMe" placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="person in widgets.dummy.people | propsFilter: {name: $select.search, age: $select.search}">
-                    <div ng-bind-html="person.name | highlight: $select.search"></div>
-                    <small>
-                        email: {{person.email}}
-                        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
-                    </small>
-                </ui-select-choices>
-            </ui-select>
-        </click-to-edit>
+            <label>Sprint Desc:</label>
+            <click-to-edit>
+                <span display-mode>{{widgets.dummy.sprint.desc}}</span>
+                <input edit-mode type="text" ng-model="widgets.dummy.offering1.desc"/>
+            </click-to-edit>
+            
+            <br/>
+            
+            <label>Assigned Person:</label>
+            <click-to-edit>
+                <span display-mode>{{widgets.dummy.sprint.assignedPerson.name}}</span>
+                <ui-select edit-mode ng-model="widgets.dummy.sprint.assignedPerson" theme="select2" ng-disabled="disabled" style="min-width: 250px;">
+                    <ui-select-match class="clickMe" placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="person in widgets.dummy.people | propsFilter: {name: $select.search, age: $select.search}">
+                        <div ng-bind-html="person.name | highlight: $select.search"></div>
+                        <small>
+                            email: {{person.email}}
+                            age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+                        </small>
+                    </ui-select-choices>
+                </ui-select>
+            </click-to-edit>
+
+            <br/>
+            
+            <label>Completed:</label>
+            <click-to-edit>
+                <span display-mode>
+                    <span class="glyphicon glyphicon-ok" style="color:green" ng-show="widgets.dummy.sprint.completed"></span>
+                    <span class="glyphicon glyphicon-remove" style="color:red" ng-show="!widgets.dummy.sprint.completed"></span>
+                </span>
+                <ui-select edit-mode class="select2-no-search" ng-model="widgets.dummy.sprint.completed" theme="select2" ng-disabled="disabled" style="min-width: 75px;">
+                    <ui-select-match class="clickMe" placeholder="Yes/No...">
+                        <span class="glyphicon glyphicon-ok" style="color:green" ng-show="$select.selected.status"></span>
+                        <span class="glyphicon glyphicon-remove" style="color:red" ng-show="!$select.selected.status"></span>
+                        <span style="font-weight:bolder">{{$select.selected.label}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="option.status as option in widgets.dummy.statusOptions">
+                        <span class="glyphicon glyphicon-ok" style="color:green" ng-show="$select.selected.status"></span>
+                        <span class="glyphicon glyphicon-remove" style="color:red" ng-show="!$select.selected.status"></span>
+                        <span style="font-weight:bolder" ng-bind-html="option.label"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </click-to-edit>
+
+        </div>
 
 
     </div>
