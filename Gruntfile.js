@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                     cwd: '<%= myApp.scripts %>',
                     dest: '<%= myApp.dist %>',
                     src:[
-                        'angular-widgets.js'
+                        'angular-click2edit.js'
                     ]
                 },
                 {
@@ -89,14 +89,14 @@ module.exports = function(grunt) {
                     cwd: '<%= myApp.styles %>',
                     dest: '<%= myApp.dist %>',
                     src:[
-                        '*.css'
+                        'angular-click2edit.css'
                     ]
                 }                ]
             }
         },
         uglify:
         {
-            '<%= myApp.dist %>/angular-widgets.min.js': ['<%= myApp.scripts %>/angular-widgets.js'],
+            '<%= myApp.dist %>/angular-click2edit.min.js': ['<%= myApp.scripts %>/angular-click2edit.js'],
             options:{
                 mangle: false // without this, angular will puke on the minified js
             }
@@ -106,7 +106,7 @@ module.exports = function(grunt) {
             files: [{
               expand: true,
               cwd: '<%= myApp.styles %>',
-              src: ['*.css', '!*.min.css'],
+              src: ['angular-click2edit.css', '!*.min.css'],
               dest: '<%= myApp.dist %>',
               ext: '.min.css'
             }]
