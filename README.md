@@ -1,7 +1,7 @@
-angular-widgets
+click-to-edit
 ===============
 
-Reusable AngularJS components/directives.
+This is a directive inspired by ```Jira``` form elements. The gist is that a form field is wrapped by this directive to provide two modes of display - ```display mode``` and ```edit mode```.  In ```display mode``` a simple text rendering is displayed. When hovering over the element it morphs into a bordered ```click to edit``` box with a bootstrap pencil glyph. Click the element toggles into ```edit mode``` where the field can then be edited. The user is offered a ```save``` and ```cancel```.
 
 Development
 -----------------
@@ -22,12 +22,7 @@ To create a distribution, which is just a minified and non-minified version on t
 $ grunt build
 ```
 
-Components
-----------------
-Currently there is a single component, I hope to add more in the future.
-
-###click-to-edit
-This is a directive inspired by ```Jira``` form elements. The gist is that a form field is wrapped by this directive to provide two modes of display - ```display mode``` and ```edit mode```.  In ```display mode``` a simple text rendering is displayed. When hovering over the element it morphs into a bordered ```click to edit``` box with a bootstrap pencil glyph. Click the element toggles into ```edit mode``` where the field can then be edited. The user is offered a ```save``` and ```cancel```.
+###Overview
 
 Any element can serve as the root of either mode, a simple example is show below.
 ```html
@@ -61,4 +56,5 @@ Below you can see an example using ```ui-select```.
 
 The most powerful aspect of this directive is to use it as template to create other directives.
 
-
+###Usage
+Currently this directive is not hosted on any CDN but fee free to download the .css and .js from the dist folder and use in a project.
