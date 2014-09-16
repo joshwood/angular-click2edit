@@ -1,6 +1,19 @@
 {
   "name": "angular-click2edit",
   "version": "0.1.0",
+  "main":[
+    "dist/angular-click2edit.min.js",
+    "dist/angular-click2edit.min.css"
+  ],
+  "keywords": [
+    "angular",
+    "click to edit"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joshwood/angular-click2edit.git"
+  },
   "dependencies": {
     "angular": "~1.2.23"
   },
