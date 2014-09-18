@@ -3,12 +3,6 @@ click-to-edit
 
 This is a directive inspired by ```Jira``` form elements. The gist is that a form field is wrapped by this directive to provide two modes of display - ```display mode``` and ```edit mode```.  In ```display mode``` a simple text rendering is displayed. When hovering over the element it morphs into a bordered ```click to edit``` box with a bootstrap pencil glyph. Click the element toggles into ```edit mode``` where the field can then be edited. The user is offered a ```save``` and ```cancel```.
 
-Usage
------------------
-```bash
-$ bower install angular-click2edit
-```
-
 Development
 -----------------
 After downloading the code you'll need to perform the typical install procedures.
@@ -26,6 +20,24 @@ This setup a server instance with livereload on port ```9000```. You can navigat
 To create a distribution, which is just a minified and non-minified version on the angular-widgets.js file, execute the following.
 ```bash
 $ grunt build
+```
+
+Usage
+-----------------
+```bash
+$ bower install angular-click2edit
+```
+
+You will need to reference the js and css files found in the ```dist``` folder
+```
+<script src="bower_components/angular-click2edit/dist/angular-click2edit.min.js"></script>
+
+<link href="bower_components/angular-click2edit/dist/angular-click2edit.min.css" rel="stylesheet" type="text/css" />
+```
+
+Once you have done that you simply need to inject the tragically named module ```widgets``` into your application. I will change this name asap as it is far too generic (and accidental honestly).
+```
+angular.module('your-app', ['widgets']);
 ```
 
 ###Overview
